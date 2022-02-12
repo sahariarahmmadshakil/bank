@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Radiant Bank</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body>
+    <h1 class="text-3xl text-center mb-4 mt-16 ">Start Your Transection</b> With <span class="text-cyan-400"><b>Radiant Bank LTD</b></span></h1>
+    <section class="mx-16">
+        <section class="grid gap-4 grid-cols-3 ">
+            <div class="bg-cyan-400 rounded">
+                <p class="text-center text-xl pt-6 ">Total Deposite</p>
+                <p class="text-center text-3xl pb-6">$<span id="totalDeposite">0.00</span> </p>
+            </div>
+            <div class="bg-cyan-300 rounded">
+                <p class="text-center text-xl pt-6 ">Total Withdraw</p>
+                <p class="text-center text-3xl pb-6">$<span id="withdrawField">0.00</span></p>
+            </div>
+            <div class="bg-cyan-200 rounded">
+                <p class="text-center text-xl pt-6 ">Account Blance</p>
+                <p class="text-center text-3xl pb-6">$<span id="accBlance">1500</span></p>
+            </div>
+        </section>
+        <divn class="grid gap-4 my-6 grid-cols-2 ">
+            <div class="bg-purple-300 rounded">
+                <p class="text-center text-xl pt-6 py-2 ">Enter Ammount To Deposite</p>
+                <input id="depositeAmmount" type="text" class="block text-center border w-3/4 mx-auto mb-4 py-2 rounded" placeholder="@ Enter Ammount To Deposite">
+
+                <button id="depositeBtn" class="block bg-cyan-400 w-3/4 mx-auto py-2 mb-6 text-white rounded">Deposite</button>
+            </div>
+            <div class="bg-purple-200 rounded">
+                <p class="text-center text-xl pt-6 py-2 ">Enter Ammount To Withdraw</p>
+                <input id="withdrawAmmount" type="text" class="block text-center border w-3/4 mx-auto mb-4 py-2 rounded" placeholder="@ Enter Ammount To Withdraw">
+
+                <button id="withdrawBtn" class="block bg-cyan-400 w-3/4 mx-auto py-2 mb-6 text-white rounded">Withdraw</button>
+            </div>
+            </div>
+    </section>
+    <script>
+        // deposite ammount get 
+        document.getElementById('depositeBtn').addEventListener('click', function() {
+            const depositeInput = document.getElementById('depositeAmmount');
+            const newBlance = depositeInput.value;
+            // deposite added 
+            const totalBlance = document.getElementById('totalDeposite');
+
+            // previous 
+            const previousBlance = totalBlance.innerText;
+            const newDepositeBlance = parseFloat(previousBlance) + parseFloat(newBlance);
+            totalBlance.innerText = newDepositeBlance;
+
+            // update Blance 
+            const prevAccBlance = document.getElementById('accBlance');
+            const currentAccBlance = prevAccBlance.innerText;
+            const accountBlance = parseFloat(currentAccBlance);
+            const finalAccountBlance = accountBlance + newDepositeBlance;
+            prevAccBlance.innerText = finalAccountBlance;
+            depositeInput.value = '';
+
+        })
+
+        // withdraw ammount area
+
+        document.getElementById('withdrawBtn').addEventListener('click', function() {
+            const withdrawAmmount = document.getElementById('withdrawAmmount');
+            const withdrawValue = withdrawAmmount.value;
+            const withdrawField = document.getElementById('withdrawField');
+            // count deafult withdraw value 
+            const deafultValue = withdrawField.innerText;
+            const finalValue = parseFloat(deafultValue) + parseFloat(withdrawValue);
+            // convert deafult value to text 
+            withdrawField.innerText = finalValue;
+            withdrawAmmount.value = '';
+
+            // blance decreasing 
+
+            const accBlance = document.getElementById('accBlance');
+            const beforeWithdraw = accBlance.innerText;
+            const convtBeforeWIthdraw = parseFloat(beforeWithdraw);
+            const afterWithdraw = convtBeforeWIthdraw - finalValue;
+            accBlance.innerText = afterWithdraw;
+        })
+    </script>
+    <!-- <script src="script.js"></script> -->
+</body>
+
+</html>
